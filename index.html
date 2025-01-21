@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lexend+Tera:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      class="main"
+      style="
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background-color: rgb(128, 186, 157);
+        max-width: 900px;
+        margin: 0 auto;
+        border-radius: 20px;
+        box-shadow: 10px 10px 30px rgb(0, 0, 0);
+        height: 500px;
+        font-family: Fira Sans;
+      "
+    >
+      <div class="timer" style="font-size: 33px; font-weight: 700">
+        <p>Kodni kiritish uchun qolgan vaqt:</p>
+        <div
+          class="timerContainer"
+          style="
+            background-color: white;
+            width: 300px;
+            height: 50px;
+            padding-top: 18px;
+            margin-left: 77px;
+            border-radius: 10px;
+          "
+        >
+          <span id="minZero" style="display: inline">0</span>
+          <span id="min">2</span>
+          <span id="twoDots"> : </span>
+          <span id="secZero" style="display: inline">0</span>
+          <span id="sec" style="letter-spacing: 8px"> 0 </span>
+        </div>
+      </div>
+      <div class="verCode" style="font-size: 33px; font-weight: 700">
+        <p>Sizning tasdiqlash kodingiz:</p>
+        <p
+          style="
+            background-color: white;
+            width: 300px;
+            height: 50px;
+            padding-top: 18px;
+            margin-left: 35px;
+            border-radius: 10px;
+          "
+        >${randomCode}</p>
+      </div>
+    </div>
+    <script>
+      let leftMin = 0;
+      let leftSec = 12;
+      const minutes = document.getElementById("min");
+      const seconds = document.getElementById("sec");
+      const twoDots = document.getElementById("twoDots");
+      const elMinZero = document.getElementById("minZero");
+      const elSecZero = document.getElementById("secZero");
+      const countdown = setInterval(() => {
+        minutes.textContent = leftMin;
+        seconds.textContent = leftSec;
+        if (leftSec <= 9) {
+          elSecZero.style.display = "inline";
+        } else {
+          elSecZero.style.display = "none";
+        }
+        if (leftMin < 9) {
+          elMinZero.style.display = "inline";
+        }
+        leftSec--;
+        if (leftSec === 0) {
+          if (leftMin === 0 && leftSec === 0) {
+            clearInterval(countdown);
+            minutes.textContent = "Vaqt tugadi!";
+            seconds.style.display = "none";
+            twoDots.style.display = "none";
+            elSecZero.style.display = "none";
+            elMinZero.style.display = "none";
+          }
+          leftMin--;
+          leftSec = 59;
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
